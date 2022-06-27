@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "tlmetics",
+  "version": "${version}",
+
+  "name": "Tyap-Lyap Cosmetics",
+  "description": "This is an example description! Tell everyone what your mod is about!",
+  "authors": [
+    "PinkGoosik"
+  ],
+
+  "license": "ARR",
+  "icon": "assets/tlmetics/icon.png",
+
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "tlmetics.CosmeticsMod"
+    ]
+  },
+  "mixins": ["tlmetics.mixins.json"],
+  
+  "custom": {
+    "modmenu": {
+        "badges": ["library"]
+    }
+  },
+
+  "depends": {
+    "fabricloader": "*",
+    "fabric": "*",
+    "minecraft": ">=1.19",
+    "java": ">=17"
+  }
+}
