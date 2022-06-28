@@ -4,6 +4,7 @@
   "package": "tlmetics.mixin",
   "compatibilityLevel": "JAVA_17",
   "client": [
+    "AbstractClientPlayerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

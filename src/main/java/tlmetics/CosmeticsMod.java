@@ -5,8 +5,10 @@ import com.google.gson.GsonBuilder;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import tlmetics.cosmetics.Capes;
 import tlmetics.data.CosmeticsData;
 import tlmetics.data.Meta;
 import tlmetics.event.ClientTickEvent;
@@ -26,12 +28,17 @@ public class CosmeticsMod implements ClientModInitializer {
     public void onInitializeClient() {
         CosmeticsMod.getMeta().ifPresent(meta -> {
             if(meta.format == FORMAT) {
+                Capes.init();
                 if(!meta.redirect.isBlank()) {
-                    CosmeticsData.data_url = meta.redirect;
+                    CosmeticsData.url = meta.redirect;
                 }
                 ClientTickEvents.END_CLIENT_TICK.register(client -> ClientTickEvent.onTick());
             }
         });
+    }
+
+    public static Identifier id(String path) {
+        return new Identifier(MOD_ID, path);
     }
 
     private static Optional<Meta> getMeta() {
