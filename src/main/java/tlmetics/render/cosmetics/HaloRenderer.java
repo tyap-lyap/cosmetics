@@ -12,12 +12,7 @@ import net.minecraft.item.ArmorItem;
 import tlmetics.CosmeticsMod;
 import tlmetics.model.CosmeticModels;
 
-public class HeadSlimeRenderer extends CosmeticItemRenderer {
-    public final String name;
-
-    public HeadSlimeRenderer(String name) {
-        this.name = name;
-    }
+public class HaloRenderer extends CosmeticItemRenderer {
 
     @Override
     public void render(BipedEntityModel<?> parent, MatrixStack matrices, VertexConsumerProvider buffer, int light, PlayerEntity player, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
@@ -26,8 +21,10 @@ public class HeadSlimeRenderer extends CosmeticItemRenderer {
         if(player.getEquippedStack(EquipmentSlot.HEAD).getItem() instanceof ArmorItem) {
             matrices.translate(0, -0.0625, 0);
         }
-        VertexConsumer vertexConsumer = buffer.getBuffer(RenderLayer.getEntityTranslucent(CosmeticsMod.id("textures/cosmetics/" + name + ".png")));
-        CosmeticModels.SLIME_MODEL.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
+        VertexConsumer vertexConsumer = buffer.getBuffer(RenderLayer.getEntityCutout(CosmeticsMod.id("textures/cosmetics/halo.png")));
+        CosmeticModels.HALO_MODEL.state.startIfNotRunning(player.age);
+        CosmeticModels.HALO_MODEL.setAngles(animationProgress);
+        CosmeticModels.HALO_MODEL.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
         matrices.pop();
     }
 }

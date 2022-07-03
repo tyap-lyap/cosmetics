@@ -20,11 +20,7 @@ public class CosmeticFeatureRenderer<T extends PlayerEntity, M extends PlayerEnt
         if(player.isInvisible()) return;
         CosmeticsData.getEntry(player.getUuid(), player.getName().getString()).ifPresent(entry -> {
             for (var cosmetic : entry.cosmetics) {
-                Cosmetics.get(cosmetic).ifPresent(element -> {
-                    matrices.push();
-                    element.renderer().render(this.getContextModel(), matrices, buffer, light, player, limbAngle, limbDistance, tickDelta, animationProgress, headYaw, headPitch);
-                    matrices.pop();
-                });
+                Cosmetics.get(cosmetic).ifPresent(item -> item.renderer().render(this.getContextModel(), matrices, buffer, light, player, limbAngle, limbDistance, tickDelta, animationProgress, headYaw, headPitch));
             }
         });
     }

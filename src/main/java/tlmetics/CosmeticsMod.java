@@ -2,10 +2,14 @@ package tlmetics;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.mojang.brigadier.arguments.IntegerArgumentType;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.server.command.CommandManager;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +19,7 @@ import tlmetics.data.CosmeticsData;
 import tlmetics.data.Meta;
 import tlmetics.event.ClientTickEvent;
 import tlmetics.model.CosmeticModelLayers;
+import tlmetics.model.CosmeticModels;
 
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -38,6 +43,20 @@ public class CosmeticsMod implements ClientModInitializer {
                     CosmeticsData.url = meta.redirect;
                 }
                 ClientTickEvents.END_CLIENT_TICK.register(client -> ClientTickEvent.onTick());
+
+//                CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
+//                    dispatcher.register(CommandManager.literal("anim")
+//                            .then(CommandManager.literal("start")
+//                                    .then(CommandManager.argument("time", IntegerArgumentType.integer()).executes(context -> {
+//                                        int age = MinecraftClient.getInstance().player.age;
+//                                        CosmeticModels.HALO_MODEL.state.start(age);
+//                                        return 1;
+//                                    }))
+//                            ).then(CommandManager.literal("stop").executes(context -> {
+//                                CosmeticModels.HALO_MODEL.state.stop();
+//                                return 1;
+//                            })));
+//                });
             }
         });
     }
@@ -48,7 +67,7 @@ public class CosmeticsMod implements ClientModInitializer {
 
     private static Optional<Meta> getMeta() {
         try {
-            URL url = new URL("https://gist.githubusercontent.com/PinkGoosik/b28b40592f846c40d8ddc6d8fc7a260a/raw/7b6e835f26629e838661b4d1f335e441b1d71343/meta.json");
+            URL url = new URL("https://gist.githubusercontent.com/PinkGoosik/f0bf37f7644821da7498e0980724a759/raw");
             URLConnection request = url.openConnection();
             request.connect();
             InputStreamReader reader = new InputStreamReader(request.getInputStream());

@@ -10,7 +10,7 @@ import java.util.*;
 
 public class CosmeticsData {
     public static final List<EntryData> ENTRIES = new ArrayList<>();
-    public static String url = "https://gist.githubusercontent.com/PinkGoosik/b28b40592f846c40d8ddc6d8fc7a260a/raw/7b6e835f26629e838661b4d1f335e441b1d71343/data.json";
+    public static String url = "https://gist.githubusercontent.com/PinkGoosik/52ca9c6cb15a7b81352aa8a44134bae1/raw";
 
     public static void reload() {
         try {
