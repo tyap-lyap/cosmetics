@@ -3,6 +3,7 @@ package tlmetics.cosmetics;
 import tlmetics.render.cosmetics.CosmeticItemRenderer;
 import tlmetics.render.cosmetics.HaloRenderer;
 import tlmetics.render.cosmetics.HeadSlimeRenderer;
+import tlmetics.render.cosmetics.SimpleWingsRenderer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,7 @@ public class Cosmetics {
         add("sakura_slime", new HeadSlimeRenderer("sakura_slime"));
         add("water_slime", new HeadSlimeRenderer("water_slime"));
         add("halo", new HaloRenderer());
+        add("blue_techno_wings", new SimpleWingsRenderer("blue_techno_wings"));
 //        add("kitsune_mask", new KitsuneMaskRenderer("kitsune_mask"));
 //        add("blue_kitsune_mask", new KitsuneMaskRenderer("blue_kitsune_mask"));
     }

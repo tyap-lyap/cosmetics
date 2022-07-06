@@ -27,8 +27,8 @@ dependencies {
 		it.mappings("net.fabricmc:yarn:${project.yarn_mappings}:v2")
 	}
 
-	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+	modImplementation "net.fabricmc:fabric-loader:${project.fabric_loader}"
+	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api}"
 
 	modLocalRuntime "maven.modrinth:lazydfu:0.1.2"
 	modLocalRuntime "maven.modrinth:ferrite-core:5.0.0-fabric"

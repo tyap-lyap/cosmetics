@@ -12,44 +12,42 @@ import net.minecraft.util.math.Vec3f;
 import tlmetics.animation.AnimationStateStuck;
 import tlmetics.animation.CosmeticAnimations;
 
-public class HaloModel extends Model {
+public class SimpleWingsModel extends Model {
     public final ModelPart root;
-    public final ModelPart halo;
+    public final ModelPart leftWing;
+    public final ModelPart rightWing;
 
     private static final Vec3f CACHE = new Vec3f();
 
-    public HaloModel(ModelPart root) {
-        super(RenderLayer::getEntityCutout);
+    public SimpleWingsModel(ModelPart root) {
+        super(RenderLayer::getEntityTranslucentCull);
         this.root = root;
-        this.halo = root.getChild("halo");
+        this.leftWing = root.getChild("left_wing");
+        this.rightWing = root.getChild("right_wing");
     }
 
     public static TexturedModelData getTexturedModelData() {
         ModelData data = new ModelData();
         ModelPartData root = data.getRoot();
 
-        root.addChild("halo", ModelPartBuilder.create()
-            .uv(-9, 0).cuboid(-4.5F, -1.0F, -4.5F, 9.0F, 0.0F, 9.0F),
-            ModelTransform.pivot(0.0F, -10.0F, 0.0F)
+        root.addChild("left_wing", ModelPartBuilder.create().uv(0, 0)
+            .cuboid(-24.0F, -9.0F, 0.0F, 24.0F, 16.0F, 0.0F),
+            ModelTransform.pivot(-3.0F, 4.0F, 5.0F)
+        );
+        root.addChild("right_wing", ModelPartBuilder.create().uv(0, 16)
+            .cuboid(0.0F, -9.0F, 0.0F, 24.0F, 16.0F, 0.0F),
+            ModelTransform.pivot(3.0F, 4.0F, 5.0F)
         );
 
         return TexturedModelData.of(data, 64, 64);
     }
 
     public void setAngles(PlayerEntity player, float animationProgress) {
-        var movin = AnimationStateStuck.get(player, CosmeticAnimations.HALO_MOVIN);
-        var upndown = AnimationStateStuck.get(player, CosmeticAnimations.HALO_UPNDOWN);
-
-        movin.startIfNotRunning(player.age);
-        upndown.startIfNotRunning(player.age);
-
+        var clap = AnimationStateStuck.get(player, CosmeticAnimations.WINGS_CLAP);
+        clap.startIfNotRunning(player.age);
         this.getPart().traverse().forEach(ModelPart::resetTransform);
-
-        movin.update(animationProgress, 1.0F);
-        movin.run(st -> animate(this, CosmeticAnimations.HALO_MOVIN, st.getTimeRunning(), 1.0F, HaloModel.CACHE));
-
-        upndown.update(animationProgress, 1.0F);
-        upndown.run(st -> animate(this, CosmeticAnimations.HALO_UPNDOWN, st.getTimeRunning(), 1.0F, HaloModel.CACHE));
+        clap.update(animationProgress, 1.0F);
+        clap.run(st -> animate(this, CosmeticAnimations.WINGS_CLAP, st.getTimeRunning(), 1.0F, SimpleWingsModel.CACHE));
     }
 
     public ModelPart getPart() {
@@ -60,7 +58,7 @@ public class HaloModel extends Model {
         return this.getPart().getChild(name);
     }
 
-    public static void animate(HaloModel model, Animation animation, long runningTime, float strength, Vec3f animationCache) {
+    public static void animate(SimpleWingsModel model, Animation animation, long runningTime, float strength, Vec3f animationCache) {
         float running = getRunningSeconds(animation, runningTime);
 
         animation.boneAnimations().forEach((modelPartName, transformations) -> {
@@ -85,6 +83,7 @@ public class HaloModel extends Model {
 
     @Override
     public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, float red, float green, float blue, float alpha) {
-        halo.render(matrices, vertices, light, overlay);
+        leftWing.render(matrices, vertices, light, overlay);
+        rightWing.render(matrices, vertices, light, overlay);
     }
 }

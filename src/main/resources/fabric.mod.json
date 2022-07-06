@@ -15,7 +15,7 @@
   "environment": "client",
   "entrypoints": {
     "client": [
-      "tlmetics.CosmeticsMod"
+      "tlmetics.Mod"
     ]
   },
   "mixins": ["tlmetics.mixins.json"],

@@ -9,7 +9,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorItem;
-import tlmetics.CosmeticsMod;
+import tlmetics.Mod;
 import tlmetics.model.CosmeticModels;
 
 public class HaloRenderer extends CosmeticItemRenderer {
@@ -21,9 +21,8 @@ public class HaloRenderer extends CosmeticItemRenderer {
         if(player.getEquippedStack(EquipmentSlot.HEAD).getItem() instanceof ArmorItem) {
             matrices.translate(0, -0.0625, 0);
         }
-        VertexConsumer vertexConsumer = buffer.getBuffer(RenderLayer.getEntityCutout(CosmeticsMod.id("textures/cosmetics/halo.png")));
-        CosmeticModels.HALO_MODEL.state.startIfNotRunning(player.age);
-        CosmeticModels.HALO_MODEL.setAngles(animationProgress);
+        VertexConsumer vertexConsumer = buffer.getBuffer(RenderLayer.getEntityCutout(Mod.id("textures/cosmetics/halo.png")));
+        CosmeticModels.HALO_MODEL.setAngles(player, animationProgress);
         CosmeticModels.HALO_MODEL.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
         matrices.pop();
     }

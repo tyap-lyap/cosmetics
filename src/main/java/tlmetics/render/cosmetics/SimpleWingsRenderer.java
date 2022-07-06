@@ -8,26 +8,27 @@ import net.minecraft.client.render.entity.model.BipedEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ArmorItem;
+import net.minecraft.item.ElytraItem;
 import tlmetics.Mod;
 import tlmetics.model.CosmeticModels;
 
-public class HeadSlimeRenderer extends CosmeticItemRenderer {
-    public final String name;
+public class SimpleWingsRenderer extends CosmeticItemRenderer {
+    private final String name;
 
-    public HeadSlimeRenderer(String name) {
+    public SimpleWingsRenderer(String name) {
         this.name = name;
     }
 
     @Override
     public void render(BipedEntityModel<?> parent, MatrixStack matrices, VertexConsumerProvider buffer, int light, PlayerEntity player, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
-        matrices.push();
-        parent.head.rotate(matrices);
-        if(player.getEquippedStack(EquipmentSlot.HEAD).getItem() instanceof ArmorItem) {
-            matrices.translate(0, -0.0625, 0);
+        if(player.getEquippedStack(EquipmentSlot.CHEST).getItem() instanceof ElytraItem) {
+            return;
         }
-        VertexConsumer vertexConsumer = buffer.getBuffer(RenderLayer.getEntityTranslucent(Mod.id("textures/cosmetics/" + name + ".png")));
-        CosmeticModels.SLIME_MODEL.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
+        matrices.push();
+        parent.body.rotate(matrices);
+        VertexConsumer vertexConsumer = buffer.getBuffer(RenderLayer.getEntityTranslucentCull(Mod.id("textures/cosmetics/" + name + ".png")));
+        CosmeticModels.WINGS_MODEL.setAngles(player, animationProgress);
+        CosmeticModels.WINGS_MODEL.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
         matrices.pop();
     }
 }

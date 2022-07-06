@@ -13,22 +13,21 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import tlmetics.cosmetics.Capes;
-import tlmetics.data.CosmeticsData;
+import tlmetics.data.Entries;
 
 @Mixin(AbstractClientPlayerEntity.class)
-public abstract class AbstractClientPlayerMixin extends PlayerEntity {
+public abstract class AbstractPlayerMixin extends PlayerEntity {
 
-    public AbstractClientPlayerMixin(World world, BlockPos pos, float yaw, GameProfile gameProfile, @Nullable PlayerPublicKey publicKey) {
-        super(world, pos, yaw, gameProfile, publicKey);
+    public AbstractPlayerMixin(World world, BlockPos pos, float yaw, GameProfile profile, @Nullable PlayerPublicKey key) {
+        super(world, pos, yaw, profile, key);
     }
 
     @Inject(method = "getCapeTexture", at = @At("HEAD"), cancellable = true)
     void getCapeTexture(CallbackInfoReturnable<Identifier> cir) {
-        CosmeticsData.getEntry(this.getUuid(), this.getName().getString())
-                .flatMap(entry -> Capes.get(entry.cape.name)).ifPresent(cloak -> {
-                    if(cloak.getLocationProvider() != null) {
-                        cir.setReturnValue(cloak.getLocationProvider().locate(this, world));
-                    }
-                });
+        Entries.get(getUuid(), getName().getString()).flatMap(entry -> Capes.get(entry.cape.name)).ifPresent(cape -> {
+            if (cape.getLocationProvider() != null) {
+                cir.setReturnValue(cape.getLocationProvider().locate(this, world));
+            }
+        });
     }
 }

@@ -1,6 +1,6 @@
 package tlmetics.cosmetics;
 
-import tlmetics.CosmeticsMod;
+import tlmetics.Mod;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ public class Capes {
 
     private static void addGrouped(String group, String... names) {
         for(String name : names) {
-            add(new Cape(name, (player, world) -> CosmeticsMod.id("textures/cape/" + group + "/" + name + ".png")));
+            add(new Cape(name, (player, world) -> Mod.id("textures/cape/" + group + "/" + name + ".png")));
         }
     }
 

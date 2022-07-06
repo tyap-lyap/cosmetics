@@ -1,18 +1,36 @@
 package tlmetics.event;
 
 import net.minecraft.client.MinecraftClient;
-import tlmetics.data.CosmeticsData;
+import tlmetics.animation.AnimationStateStuck;
+import tlmetics.data.Entries;
 
 public class ClientTickEvent {
     private static boolean isLoaded = false;
+    private static boolean isStopped = true;
+
+    public static void onWorldJoin() {
+        Entries.reload();
+    }
+
+    public static void onWorldLeave() {
+        Entries.clear();
+        AnimationStateStuck.clear();
+    }
 
     public static void onTick() {
         if(MinecraftClient.getInstance().world != null) {
             if(!isLoaded) {
-                CosmeticsData.reload();
+                onWorldJoin();
                 isLoaded = true;
             }
+            isStopped = true;
         }
-        else isLoaded = false;
+        else {
+            if(isStopped) {
+                onWorldLeave();
+                isStopped = false;
+            }
+            isLoaded = false;
+        }
     }
 }
