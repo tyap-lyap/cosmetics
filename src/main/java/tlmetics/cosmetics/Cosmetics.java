@@ -18,7 +18,9 @@ public class Cosmetics {
         add("sakura_slime", new HeadSlimeRenderer("sakura_slime"));
         add("water_slime", new HeadSlimeRenderer("water_slime"));
         add("halo", new HaloRenderer());
-        add("blue_techno_wings", new SimpleWingsRenderer("blue_techno_wings"));
+        add("frozen_wings", new SimpleWingsRenderer("frozen_wings"));
+        add("amethyst_wings", new SimpleWingsRenderer("amethyst_wings"));
+        add("emerald_wings", new SimpleWingsRenderer("emerald_wings"));
 //        add("kitsune_mask", new KitsuneMaskRenderer("kitsune_mask"));
 //        add("blue_kitsune_mask", new KitsuneMaskRenderer("blue_kitsune_mask"));
     }

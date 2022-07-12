@@ -34,20 +34,32 @@ public class CosmeticAnimations {
         ).build();
 
     public static final Animation WINGS_CLAP = AnimationBuilder.withLength(4f).looping()
+        .addAnimation("left_wing", new Transformation(Targets.TRANSLATE,
+            new Keyframe(0f, translate(0f, 0f, 0f), SPLINE),
+            new Keyframe(1f, translate(0f, 0.5f, 0f), SPLINE),
+            new Keyframe(2f, translate(0f, 0.5f, 0f), SPLINE),
+            new Keyframe(4f, translate(0f, 0f, 0f), SPLINE))
+        )
         .addAnimation("left_wing", new Transformation(Targets.ROTATE,
-            new Keyframe(1f, rotate(5f, 5f, 0f), SPLINE),
             new Keyframe(0f, rotate(0f, 0f, 0f), SPLINE),
-            new Keyframe(2f, rotate(2.5f, 10f, 0f), SPLINE),
-            new Keyframe(2.5f, rotate(0f, 0f, 0f), SPLINE),
-            new Keyframe(3f, rotate(0f, -5f, 0f), SPLINE),
+            new Keyframe(1f, rotate(5f, 20f, 10f), SPLINE),
+            new Keyframe(2f, rotate(2.5f, 15f, 7f), SPLINE),
+            new Keyframe(2.5f, rotate(0f, -5f, 0f), SPLINE),
+            new Keyframe(3f, rotate(-2.5f, -10f, 0f), SPLINE),
             new Keyframe(4f, rotate(0f, 0f, 0f), SPLINE))
         )
+        .addAnimation("right_wing", new Transformation(Targets.TRANSLATE,
+            new Keyframe(0f, translate(0f, 0f, 0f), SPLINE),
+            new Keyframe(1f, translate(0f, 0.5f, 0f), SPLINE),
+            new Keyframe(2f, translate(0f, 0.5f, 0f), SPLINE),
+            new Keyframe(4f, translate(0f, 0f, 0f), SPLINE))
+        )
         .addAnimation("right_wing", new Transformation(Targets.ROTATE,
-            new Keyframe(1f, rotate(5f, -5f, 0f), SPLINE),
             new Keyframe(0f, rotate(0f, 0f, 0f), SPLINE),
-            new Keyframe(2f, rotate(2.5f, -10f, 0f), SPLINE),
-            new Keyframe(2.5f, rotate(0f, 0f, 0f), SPLINE),
-            new Keyframe(3f, rotate(0f, 5f, 0f), SPLINE),
+            new Keyframe(1f, rotate(5f, -20f, -10f), SPLINE),
+            new Keyframe(2f, rotate(2.5f, -15f, -7f), SPLINE),
+            new Keyframe(2.5f, rotate(0f, 5f, 0f), SPLINE),
+            new Keyframe(3f, rotate(-2.5f, 10f, 0f), SPLINE),
             new Keyframe(4f, rotate(0f, 0f, 0f), SPLINE))
         ).build();
 
