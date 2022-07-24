@@ -19,7 +19,7 @@ public class HaloModel extends Model {
     private static final Vec3f CACHE = new Vec3f();
 
     public HaloModel(ModelPart root) {
-        super(RenderLayer::getEntityCutout);
+        super(RenderLayer::getEntityCutoutNoCull);
         this.root = root;
         this.halo = root.getChild("halo");
     }

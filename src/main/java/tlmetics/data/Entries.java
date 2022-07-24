@@ -1,5 +1,6 @@
 package tlmetics.data;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import tlmetics.Mod;
 
 import java.io.InputStreamReader;
@@ -14,7 +15,9 @@ public class Entries {
     public static void reload() {
         try {
             ENTRIES.clear();
-            URL url = new URL(Entries.url);
+            String urlStr = Entries.url;
+            urlStr = urlStr.replaceAll("%random%", RandomStringUtils.randomAlphabetic(9));
+            URL url = new URL(urlStr);
             URLConnection request = url.openConnection();
             request.connect();
             InputStreamReader reader = new InputStreamReader(request.getInputStream());

@@ -20,7 +20,7 @@ public class SimpleWingsModel extends Model {
     private static final Vec3f CACHE = new Vec3f();
 
     public SimpleWingsModel(ModelPart root) {
-        super(RenderLayer::getEntityTranslucentCull);
+        super(RenderLayer::getEntityCutoutNoCull);
         this.root = root;
         this.leftWing = root.getChild("left_wing");
         this.rightWing = root.getChild("right_wing");

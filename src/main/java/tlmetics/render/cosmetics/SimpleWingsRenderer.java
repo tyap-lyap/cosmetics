@@ -26,9 +26,9 @@ public class SimpleWingsRenderer extends CosmeticItemRenderer {
         }
         matrices.push();
         parent.body.rotate(matrices);
-        VertexConsumer vertexConsumer = buffer.getBuffer(RenderLayer.getEntityTranslucentCull(Mod.id("textures/cosmetics/" + name + ".png")));
+        VertexConsumer vertexConsumer = buffer.getBuffer(RenderLayer.getEntityCutoutNoCull(Mod.id("textures/cosmetics/" + name + ".png")));
         CosmeticModels.WINGS_MODEL.setAngles(player, animationProgress);
-        CosmeticModels.WINGS_MODEL.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
+        CosmeticModels.WINGS_MODEL.render(matrices, vertexConsumer, 15728880, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
         matrices.pop();
     }
 }
