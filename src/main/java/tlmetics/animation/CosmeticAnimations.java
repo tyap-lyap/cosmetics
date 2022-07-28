@@ -7,6 +7,8 @@ import net.minecraft.client.render.entity.animation.Keyframe;
 import net.minecraft.client.render.entity.animation.Transformation;
 import net.minecraft.client.render.entity.animation.Transformation.Targets;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -87,7 +89,41 @@ public class CosmeticAnimations {
 		}
 
 		public Animation build() {
-			return new Animation(this.length, this.looping, this.animations);
+			Map<String, List<Transformation>> map = Maps.newHashMap();
+
+			animations.forEach((str, trs) -> {
+				List<Transformation> list = Lists.newArrayList();
+				trs.forEach(t -> {
+					Keyframe[] sorted = sort(t);
+					list.add(new Transformation(t.target(), sorted));
+				});
+				map.put(str, list);
+			});
+
+			return new Animation(length, looping, map);
+		}
+
+		private static Keyframe[] sort(Transformation t) {
+			var frames = t.keyframes();
+			Map<Float, Keyframe> timestampSlashFrame = Maps.newHashMap();
+
+			for (Keyframe frame : frames) {
+				timestampSlashFrame.put(frame.timestamp(), frame);
+			}
+			Object[] sortedFloats = timestampSlashFrame.keySet().toArray();
+			Arrays.sort(sortedFloats);
+
+			ArrayList<Keyframe> sortedFrames = Lists.newArrayList();
+
+			for (var timestamp : sortedFloats) {
+				sortedFrames.add(timestampSlashFrame.get((float) timestamp));
+			}
+			Keyframe[] casted = new Keyframe[sortedFrames.size()];
+
+			for (int f = 0; f < sortedFrames.size(); f++) {
+				casted[f] = sortedFrames.get(f);
+			}
+			return casted;
 		}
 	}
 }
