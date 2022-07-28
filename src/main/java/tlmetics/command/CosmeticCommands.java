@@ -2,7 +2,7 @@ package tlmetics.command;
 
 public class CosmeticCommands {
 
-    public static void init() {
+	public static void init() {
 //                CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
 //                    dispatcher.register(CommandManager.literal("anim")
 //                            .then(CommandManager.literal("start")
@@ -16,5 +16,5 @@ public class CosmeticCommands {
 //                                return 1;
 //                            })));
 //                });
-    }
+	}
 }

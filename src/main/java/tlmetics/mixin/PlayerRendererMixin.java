@@ -14,13 +14,13 @@ import tlmetics.render.CosmeticFeatureRenderer;
 @Mixin(PlayerEntityRenderer.class)
 public abstract class PlayerRendererMixin extends LivingEntityRenderer<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> {
 
-    public PlayerRendererMixin(EntityRendererFactory.Context context, PlayerEntityModel<AbstractClientPlayerEntity> model, float shadowRadius) {
-        super(context, model, shadowRadius);
-    }
+	public PlayerRendererMixin(EntityRendererFactory.Context context, PlayerEntityModel<AbstractClientPlayerEntity> model, float shadowRadius) {
+		super(context, model, shadowRadius);
+	}
 
-    @Inject(at = @At("RETURN"), method = "<init>")
-    public void init(EntityRendererFactory.Context context, boolean slim, CallbackInfo ci) {
-        this.addFeature(new CosmeticFeatureRenderer<>(this));
-    }
+	@Inject(at = @At("RETURN"), method = "<init>")
+	public void init(EntityRendererFactory.Context context, boolean slim, CallbackInfo ci) {
+		this.addFeature(new CosmeticFeatureRenderer<>(this));
+	}
 }
 

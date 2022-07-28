@@ -1,7 +1,7 @@
 package tlmetics.data;
 
 public class UserData {
-    public String name = "";
-    public String uuid = "";
-    public String discord = "";
+	public String name = "";
+	public String uuid = "";
+	public String discord = "";
 }

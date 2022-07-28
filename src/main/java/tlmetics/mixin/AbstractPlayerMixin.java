@@ -18,16 +18,16 @@ import tlmetics.data.Entries;
 @Mixin(AbstractClientPlayerEntity.class)
 public abstract class AbstractPlayerMixin extends PlayerEntity {
 
-    public AbstractPlayerMixin(World world, BlockPos pos, float yaw, GameProfile profile, @Nullable PlayerPublicKey key) {
-        super(world, pos, yaw, profile, key);
-    }
+	public AbstractPlayerMixin(World world, BlockPos pos, float yaw, GameProfile profile, @Nullable PlayerPublicKey key) {
+		super(world, pos, yaw, profile, key);
+	}
 
-    @Inject(method = "getCapeTexture", at = @At("HEAD"), cancellable = true)
-    void getCapeTexture(CallbackInfoReturnable<Identifier> cir) {
-        Entries.get(getUuid(), getName().getString()).flatMap(entry -> Capes.get(entry.cape.name)).ifPresent(cape -> {
-            if (cape.getLocationProvider() != null) {
-                cir.setReturnValue(cape.getLocationProvider().locate(this, world));
-            }
-        });
-    }
+	@Inject(method = "getCapeTexture", at = @At("HEAD"), cancellable = true)
+	void getCapeTexture(CallbackInfoReturnable<Identifier> cir) {
+		Entries.get(getUuid(), getName().getString()).flatMap(entry -> Capes.get(entry.cape.name)).ifPresent(cape -> {
+			if(cape.getLocationProvider() != null) {
+				cir.setReturnValue(cape.getLocationProvider().locate(this, world));
+			}
+		});
+	}
 }

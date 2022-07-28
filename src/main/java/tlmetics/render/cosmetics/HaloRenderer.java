@@ -14,16 +14,16 @@ import tlmetics.model.CosmeticModels;
 
 public class HaloRenderer extends CosmeticItemRenderer {
 
-    @Override
-    public void render(BipedEntityModel<?> parent, MatrixStack matrices, VertexConsumerProvider buffer, int light, PlayerEntity player, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
-        matrices.push();
-        parent.head.rotate(matrices);
-        if(player.getEquippedStack(EquipmentSlot.HEAD).getItem() instanceof ArmorItem) {
-            matrices.translate(0, -0.0625, 0);
-        }
-        VertexConsumer vertexConsumer = buffer.getBuffer(RenderLayer.getEntityCutoutNoCull(Mod.id("textures/cosmetics/halo.png")));
-        CosmeticModels.HALO_MODEL.setAngles(player, animationProgress);
-        CosmeticModels.HALO_MODEL.render(matrices, vertexConsumer, 15728880, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
-        matrices.pop();
-    }
+	@Override
+	public void render(BipedEntityModel<?> parent, MatrixStack matrices, VertexConsumerProvider buffer, int light, PlayerEntity player, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
+		matrices.push();
+		parent.head.rotate(matrices);
+		if(player.getEquippedStack(EquipmentSlot.HEAD).getItem() instanceof ArmorItem) {
+			matrices.translate(0, -0.0625, 0);
+		}
+		VertexConsumer vertexConsumer = buffer.getBuffer(RenderLayer.getEntityCutoutNoCull(Mod.id("textures/cosmetics/halo.png")));
+		CosmeticModels.HALO_MODEL.setAngles(player, animationProgress);
+		CosmeticModels.HALO_MODEL.render(matrices, vertexConsumer, 15728880, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
+		matrices.pop();
+	}
 }
