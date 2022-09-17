@@ -3,6 +3,7 @@ package tlmetics;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.util.Identifier;
@@ -15,6 +16,7 @@ import tlmetics.data.Entries;
 import tlmetics.data.Meta;
 import tlmetics.event.ClientTickEvent;
 import tlmetics.model.CosmeticModelLayers;
+import tlmetics.util.CapeDecoder;
 
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -35,6 +37,7 @@ public class Mod implements ClientModInitializer {
 				Capes.init();
 				CosmeticModelLayers.init();
 				CosmeticCommands.init();
+				ClientLifecycleEvents.CLIENT_STARTED.register(client -> CapeDecoder.load(meta));
 				if(!meta.redirect.isBlank()) Entries.url = meta.redirect;
 				ClientTickEvents.END_CLIENT_TICK.register(client -> ClientTickEvent.onTick());
 			}

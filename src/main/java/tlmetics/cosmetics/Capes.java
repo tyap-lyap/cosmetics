@@ -28,7 +28,8 @@ public class Capes {
 		}
 	}
 
-	private static void add(Cape cape) {
+	public static void add(Cape cape) {
+		CAPES.removeIf(c -> c.getName().equals(cape.getName()));
 		CAPES.add(cape);
 	}
 
